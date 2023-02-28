@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="kingfalls.raidtree">
+      <field name="name">kingfalls list</field>
+      <field name="model">kingfalls.raid</field>
+      <field name="arch" type="xml">
+        <tree decoration-danger="amenaza=='1'" decoration-warning="amenaza=='2'" decoration-success="amenaza=='3'">
+            <field name="name"/>
+            <field name="descripcion"/>
+            <field name="amenaza"/>
+            <field name="poder"/>
+            <field name="image" widget="image"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="kingfalls.raidform">
+      <field name="name">kingfalls list</field>
+      <field name="model">kingfalls.raid</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="descripcion"/>
+              <field name="amenaza"/>
+              <field name="poder"/>
+              <field name="image" widget="image"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    </data>
+</odoo>

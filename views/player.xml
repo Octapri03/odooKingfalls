@@ -1,0 +1,219 @@
+<odoo>
+  <data>
+<!-- IU de los players -->
+
+
+    <record model="ir.actions.act_window" id="kingfalls.action_battle_wizard_action">
+      <field name="name">Create Battle</field>
+      <field name="res_model">kingfalls.battle_wizard</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_player_modify_wizard">
+      <field name="name">Modify Player</field>
+      <field name="res_model">kingfalls.player_modify_wizard</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.view" id="kingfalls.playertree">
+      <field name="name">kingfalls list</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="bando"/>
+            <field name="comarca"/>
+            <field name="poblacion"/>
+            <field name="guardias"/>
+            <field name="dinero"/>
+            <field name="produccion"/>
+            <field name="aliados"/>
+            <field name="minas"/>
+            <field name="is_player"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="kingfalls.playerform">
+      <field name="name">kingfalls list</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="num_minas_compradas_bosque"/>
+              <field name="num_minas_compradas_desierto"/>
+              <field name="num_minas_compradas_pantano"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="kingfalls.player_modify_form">
+      <field name="name">kingfalls modify player</field>
+      <field name="model">kingfalls.player_modify_wizard</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="bando"/>
+              <field name="comarca"/>
+              <field name="poblacion"/>
+              <field name="guardias"/>
+              <field name="dinero"/>
+              <field name="produccion"/>
+              <field name="is_player"/>
+            </group>
+          </sheet>
+          <footer>
+          <button name="guardar_player"
+                    type="object"
+                    string="Guardar Cambios"
+                    class="btn btn-primary">
+              </button>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!--Search-->
+
+    <record model="ir.ui.view" id="kingfalls.player_search">
+            <field name="name">Player Search</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+              <search>
+                <field name="name"/>
+                <filter name="player_partner" string="Is Player" domain="[('is_player','=',True)]"/>
+              </search>
+            </field>
+    </record>
+
+        <!-- Inherit -->
+
+    <record model="ir.ui.view" id="kingfalls.player_partner_list">
+      <field name="name">Kingfalls player partner</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <notebook>
+            <page string="Kingfalls">
+            <group>
+              <field name="name"/>
+              <field name="comarca"/>
+              <field name="bando"/>
+              <field name="poblacion"/>
+              <field name="guardias"/>
+              <field name="dinero" attrs="{'invisible':[('dinero', '=', 0)]}"/>
+              <field name="produccion"/>
+              <button name="sumar_guardias"
+                    type="object"
+                    string="Obtener Guardias"
+                    class="btn btn-primary">
+              </button>
+              <field name="is_player"/>
+              <field name="aliados">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="comarca"/>
+                    <field name="bando"/>
+                    <field name="defensa"/>
+                    <field name="poblacion"/>
+                    <field name="guardias"/>
+                    <field name="image"/>
+
+                    <templates>
+                      <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                          <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                               t-attf-style="background-image:url('#{kanban_image('kingfalls.ciudad',
+                               'image', record.id.value, placeholder)}')"
+                               >
+                          </div>
+
+                          <div class="oe_kanban_details d-flex flex-column">
+                            <a type="open">
+                              <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                            <ul>
+                              <li>Comarca: <field name="comarca"/></li>
+                              <li>Bando: <field name="bando"/></li>
+                              <li>Defensa: <field name="defensa"/></li>
+                              <li>Poblacion: <field name="poblacion"/></li>
+                              <li>Guardias: <field name="guardias"/></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </t>
+                    </templates>
+                  </kanban>
+              </field>
+              <field name="minas">
+                <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                  <field name="produccion"/>
+                  <field name="precio"/>
+                  <field name="image"/>
+        
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                        <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                             t-attf-style="background-image:url('#{kanban_image('kingfalls.mina',
+                             'image', record.id.value, placeholder)}')"
+                             >
+                        </div>
+        
+                        <div class="oe_kanban_details d-flex flex-column">
+                          <a type="open">
+                            <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                          <ul>
+                            <li>Produccion: <field name="produccion"/></li>
+                            <li>Precio: <field name="precio"/></li>
+                          </ul>
+                        </div>
+
+                          <div class="oe_kanban_details d-flex flex-column">
+                              <button name="comprar_mina"
+                              type="object"
+                              string="Comprar Mina"
+                              class="btn btn-primary"
+                              context="{'ctx_player':parent.id}">Comprar Mina
+                              </button>
+                          </div>
+                        </div>
+                      
+                    </t>
+                    </templates>
+                  </kanban>
+              </field>
+              <button name="show_mines"
+                      type="object"
+                      string="Historial Minas Compradas"
+                      class="btn btn-primary">
+              </button>
+              <button name="%(action_battle_wizard_action)d"
+                    type="action"
+                    string="Crear Batalla"
+                    class="btn btn-primary">
+              </button>
+            </group>
+            <footer>
+            <button name="%(action_player_modify_wizard)d"
+                    type="action"
+                    string="Modificar Player"
+                    class="btn btn-primary">
+              </button>
+            </footer>
+            </page>
+        </notebook>
+      </field>
+    </record>
+    </data>
+</odoo>

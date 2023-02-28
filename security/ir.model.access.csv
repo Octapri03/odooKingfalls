@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kingfalls_ciudad,kingfalls.ciudad,model_kingfalls_ciudad,base.group_user,1,1,1,1
+access_kingfalls_bando,kingfalls.bando,model_kingfalls_bando,base.group_user,1,1,1,1
+access_kingfalls_raid,kingfalls.raid,model_kingfalls_raid,base.group_user,1,1,1,1
+access_kingfalls_comarca,kingfalls.comarca,model_kingfalls_comarca,base.group_user,1,1,1,1
+access_kingfalls_mina,kingfalls.mina,model_kingfalls_mina,base.group_user,1,1,1,1
+access_kingfalls_battle,kingfalls.battle,model_kingfalls_battle,base.group_user,1,1,1,1
+access_kingfalls_battle_wizard,kingfalls.battle_wizard,model_kingfalls_battle_wizard,base.group_user,1,1,1,1
+access_kingfalls_player_modify_wizard,kingfalls.player_modify_wizard,model_kingfalls_player_modify_wizard,base.group_user,1,1,1,1

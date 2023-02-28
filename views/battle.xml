@@ -1,0 +1,124 @@
+<odoo>
+  <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="kingfalls.battle_tree">
+        <field name="name">kingfalls list</field>
+        <field name="model">kingfalls.battle</field>
+        <field name="arch" type="xml">
+            <tree>
+            <field name="name"/>
+            <field name="date_start"/>
+            <field name="date_end"/>
+            <field name="progress" widget="progressbar"/>
+            <field name="player1"/>
+            <field name="player2"/>
+            <field name="winner"/>
+            </tree>
+        </field>
+        </record>
+
+
+      <record model="ir.ui.view" id="kingfalls.battle_form">
+      <field name="name">kingfalls form</field>
+      <field name="model">kingfalls.battle</field>
+      <field name="arch" type="xml">
+        <form >
+            <header>
+                <field name="player1" style="background:LIGHTBLUE;"/>
+                <field name="date_start" style="background:CYAN;"/>
+                <field name="date_end" style="background:CYAN;"/>
+                <field name="player2" style="background:LIGHTBLUE;"/>
+            </header>
+          <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="date_start"/>
+              <field name="date_end"/>
+            </group>
+            <group>
+              <field name="player1"/>
+              <field name="player2"/>
+              <field name="progress" widget="progressbar"/>
+              <field name="rondas_ganadas_player1"/>
+              <field name="rondas_ganadas_player2"/>
+              <field name="winner"/>
+            </group>
+            <footer>
+              <button name="iniciar_batalla"
+                      type="object"
+                      string="Iniciar Batalla"
+                      class="btn btn-primary">
+              </button>
+            </footer>
+          </group>
+        </sheet>
+        </form>
+      </field>
+     </record>
+
+    <record model="ir.ui.view" id="kingfalls.battle_calendar">
+      <field name="name">kingfalls list</field>
+      <field name="model">kingfalls.battle</field>
+      <field name="arch" type="xml">
+        <calendar string="Battle Calendar"
+                  date_start="date_start"
+                  date_stop="date_end"
+                  color = "player1"
+        >
+          <field name="name"/>
+
+          <field name="player1"/>
+          <field name="player2"/>
+        </calendar>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="kingfalls.battle_wizard_form">
+            <field name="name">Create battle</field>
+            <field name="model">kingfalls.battle_wizard</field>
+            <field name="arch" type="xml">
+              <form>
+                    <header>
+                    <button name="button_state_previos" type="object"
+                                        string="Previous"
+                                        states="2,3"/>
+
+                    <button name="button_state_next" type="object"
+                                        string="Next" states="1,2"
+                                        class="oe_highlight"/>
+                    <field name="state" widget="statusbar" />
+                  </header>
+                  <sheet>
+                  <group states='1'>
+                    <h1>Jugador 1</h1>
+                    <field name="name"/>
+                    <field name="player1" readonly='1'/>
+                    <field name="player1_guardias" readonly='1'/>
+                    <field name="player1_image" widget="image"/>
+                  </group>
+
+                  <group states='2'>
+                    <h1>Jugador 2</h1>
+                    <field name="player2"  domain = "[('id','!=',context.get('player1_context',[])),('is_player','=',True)]"/>
+                    <field name="player2_guardias" readonly='1'/>
+                    <field name="player2_image" widget="image"/>                 
+                  </group>
+
+                  <group states='3'>
+                    <h1>Batalla</h1>
+                      <field name="player1_resume" mode="kanban"/>
+                    <h1>SE ENFRENTARÁ A: </h1>
+                     <field name="player2_resume" mode="kanban"/>
+                  </group>
+                </sheet>
+                  <footer>
+                    <button states='3' name="create_battle" string="Crear Batalla" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                  </footer>
+              </form>
+            </field>
+      </record>
+    </data>
+</odoo>

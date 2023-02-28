@@ -1,0 +1,88 @@
+<odoo>
+  <data>
+  
+    <record model="ir.actions.act_window" id="kingfalls.action_player_window">
+      <field name="name">Jugador</field>
+      <field name="res_model">res.partner</field>
+      <field name="domain"></field>
+      <field name="search_view_id" ref="kingfalls.player_search"></field>
+      <field name="context">{'search_default_player_partner': 1, 'default_is_player': True, }</field>
+      <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_ciudad_window">
+      <field name="name">Ciudad</field>
+      <field name="res_model">kingfalls.ciudad</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_comarca_window">
+      <field name="name">Comarca</field>
+      <field name="res_model">kingfalls.comarca</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_bando_window">
+      <field name="name">Bando</field>
+      <field name="res_model">kingfalls.bando</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_raid_window">
+      <field name="name">Raid</field>
+      <field name="res_model">kingfalls.raid</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_mina_window">
+      <field name="name">Mina</field>
+      <field name="res_model">kingfalls.mina</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_battle_window">
+      <field name="name">Batalla</field>
+      <field name="res_model">kingfalls.battle</field>
+      <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Kingfalls" id="kingfalls.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Jugador" id="kingfalls.menu_1" parent="kingfalls.menu_root"/>
+    <menuitem name="Ciudades" id="kingfalls.menu_2" parent="kingfalls.menu_root"/>
+    <menuitem name="Comarcas" id="kingfalls.menu_3" parent="kingfalls.menu_root"/>
+    <menuitem name="Bandos" id="kingfalls.menu_4" parent="kingfalls.menu_root"/>
+    <menuitem name="Raids" id="kingfalls.menu_5" parent="kingfalls.menu_root"/>
+    <menuitem name="Minas" id="kingfalls.menu_6" parent="kingfalls.menu_root"/>
+    <menuitem name="Batallas" id="kingfalls.menu_7" parent="kingfalls.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Jugadores" id="kingfalls.menu_kingfalls_player" parent="kingfalls.menu_1"
+              action="kingfalls.action_player_window"/>
+
+    <menuitem name="Ciudades" id="kingfalls.menu_kingfalls_ciudad" parent="kingfalls.menu_2"
+              action="kingfalls.action_ciudad_window"/>
+
+    <menuitem name="Comarcas" id="kingfalls.menu_kingfalls_comarca" parent="kingfalls.menu_3"
+              action="kingfalls.action_comarca_window"/>
+
+    <menuitem name="Bandos" id="kingfalls.menu_kingfalls_bando" parent="kingfalls.menu_4"
+              action="kingfalls.action_bando_window"/>
+            
+    <menuitem name="Raids" id="kingfalls.menu_kingfalls_raid" parent="kingfalls.menu_5"
+              action="kingfalls.action_raid_window"/>
+
+    <menuitem name="Minas" id="kingfalls.menu_kingfalls_mina" parent="kingfalls.menu_6"
+              action="kingfalls.action_mina_window"/>
+
+    <menuitem name="Batallas" id="kingfalls.menu_kingfalls_battle" parent="kingfalls.menu_7"
+              action="kingfalls.action_battle_window"/>
+
+  </data>
+</odoo>
